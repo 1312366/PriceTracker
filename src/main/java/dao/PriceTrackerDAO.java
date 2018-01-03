@@ -17,7 +17,6 @@ import java.util.Date;
 import java.util.List;
 import net.sourceforge.jtds.jdbc.*;
 import net.sourceforge.jtds.jdbcx.*;
-//hello
 
 /**
  *
