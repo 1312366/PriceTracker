@@ -8,12 +8,14 @@ var param = function (name, value) {
 $(document).ready(function () {
     $("#btn_search").click(function () {
         getDataTiki($("#inputURL").val());
+//        getPriceProduct($("#inputURL").val());
+        getPriceHistory($("#inputURL").val());
     });
 });
 
 var getPriceProduct = function (url) {
     var filterParam = new Array();
-    filterParam[filterParam.length] = new param("link", "abc");
+    filterParam[filterParam.length] = new param("url", url);
     $.ajax({
         url: "getPriceProduct",
         type: "POST",
@@ -23,6 +25,57 @@ var getPriceProduct = function (url) {
             for (var key in response) {
                 alert(response[key].avgPrice);
             }
+        },
+        error: function () {
+        }
+    });
+};
+var getPriceHistory = function (url) {
+    var filterParam = new Array();
+    filterParam[filterParam.length] = new param("url", url);
+    $.ajax({
+        url: "getPriceHistory",
+        type: "POST",
+        data: filterParam,
+        success: function (response) {
+            response = $.parseJSON(response);
+            var catelories = new Array();
+            var productsPrice = new Array();
+            $.each(response, function (key) {
+                catelories[catelories.length] = response[key].dateUpdated;
+                productsPrice[productsPrice.length] = response[key].price;
+            });
+
+            Highcharts.chart('chartContainer', {
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Lịch sử giá sản phẩm'
+                },
+                subtitle: {
+                    text: 'Nguồn: tiki.vn'
+                },
+                xAxis: {
+                    categories: catelories
+                },
+                yAxis: {
+                    title: {
+                        text: 'Giá'
+                    }
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        enableMouseTracking: false
+                    }
+                },
+                series: [{
+                        data: productsPrice
+                    }]
+            });
         },
         error: function () {
         }

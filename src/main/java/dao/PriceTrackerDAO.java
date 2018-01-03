@@ -12,10 +12,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import net.sourceforge.jtds.jdbc.*;
 import net.sourceforge.jtds.jdbcx.*;
 //hello
+
 /**
  *
  * @author Minh Tran
@@ -78,6 +81,44 @@ public class PriceTrackerDAO {
 
     }
 
+    public List<PriceDTO> getPriceHistory(String link) {
+        Connection con = getConnection();
+        List<PriceDTO> list = new ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT * FROM PRODUCTS_PRICE WHERE PRODUCT_LINK= ?";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, link);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                PriceDTO priceDTO = new PriceDTO();
+                priceDTO.setDateUpdated(rs.getString("DATE_UPDATED"));
+                priceDTO.setPrice(rs.getInt("PRODUCT_PRICE"));
+                list.add(priceDTO);
+            }
+            con.close();
+            return list;
+        } catch (Exception ex) {
+            ex.toString();
+            return list;
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+            }
+        }
+
+    }
+
     //<editor-fold defaultstate="collapsed" desc="INSERT DATA TO SQL SERVER ">
     public void insertDataToDB() {
         Connection con = null;
@@ -99,7 +140,7 @@ public class PriceTrackerDAO {
                 String[] data = line.split(cvsSplitBy);
                 ps.setString(1, data[0]);
                 ps.setInt(2, Integer.parseInt(data[1]));
-                ps.setString(3,dateUpdate);
+                ps.setString(3, dateUpdate);
                 ps.addBatch();
             }
             ps.executeBatch();

@@ -13,6 +13,7 @@
     <servlet-mapping>
         <servlet-name>homepage</servlet-name>
         <url-pattern>/getPriceProduct</url-pattern>
+        <url-pattern>/getPriceHistory</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

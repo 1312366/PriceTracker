@@ -8,45 +8,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="w2ui-1.5.rc1/w2ui-1.5.rc1.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <script>
-            window.onload = function () {
-
-                var chart = new CanvasJS.Chart("chartContainer", {
-                    animationEnabled: true,
-                    theme: "light2",
-                    title: {
-                        text: "Simple Line Chart"
-                    },
-                    axisY: {
-                        includeZero: false
-                    },
-                    data: [{
-                            type: "line",
-                            dataPoints: [
-                                {y: 450},
-                                {y: 414},
-                                {y: 520, indexLabel: "highest", markerColor: "red", markerType: "triangle"},
-                                {y: 460},
-                                {y: 450},
-                                {y: 500},
-                                {y: 480},
-                                {y: 480},
-                                {y: 410, indexLabel: "lowest", markerColor: "DarkSlateGrey", markerType: "cross"},
-                                {y: 500},
-                                {y: 480},
-                                {y: 510}
-                            ]
-                        }]
-                });
-                chart.render();
-
-            }
-        </script>
     </head>
     <body>
 
@@ -102,12 +66,12 @@
                             <td>27.500.000đ</td>
                             <td>07-12-2017</td>
                         </tr>
-              
+
                     </tbody>
                 </table>
             </div>
             <div class="col-md-8 price-history-chart" >
-                <div class="col-md6" id="chartContainer" style="height: 300px; width: 100%;"></div>
+                <div class="col-md6" id="chartContainer" style="min-width: 300px; height: 400px; margin: 0 auto">></div>
             </div>
             <div class="red-products col-md-12" style="
                  margin-top: 100px;
@@ -148,8 +112,8 @@
         <!-- IMPORT  -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-        <script src="w2ui-1.5.rc1/w2ui-1.5.rc1.min.js" type="text/javascript"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
         <script src="homepage.js" type="text/javascript"></script>
     </body>
 </html>

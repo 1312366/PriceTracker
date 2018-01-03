@@ -8,11 +8,32 @@ public class PriceDTO {
     int lowestPrice;
     int avgPrice;
     int highestPrice;
+    int price;
+    String dateUpdated;
+    
     public PriceDTO(){
+        this.price =0;
         this.avgPrice=0;
         this.highestPrice=0;
         this.lowestPrice=0;
+        this.dateUpdated="";
     }   
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public String getDateUpdated() {
+        return dateUpdated;
+    }
+
+    public void setDateUpdated(String dateUpdated) {
+        this.dateUpdated = dateUpdated;
+    }
 
     public int getLowestPrice() {
         return lowestPrice;

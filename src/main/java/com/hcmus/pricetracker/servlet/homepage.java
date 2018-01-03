@@ -31,9 +31,15 @@ public class homepage extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         //<editor-fold defaultstate="collapsed" desc="EVENT CHECK LOGIN">
         if (userPath.equals("/getPriceProduct")) {
+            String url = request.getParameter("url");
             PriceTrackerDAO priceTrackerDAO = new PriceTrackerDAO();
-            priceTrackerDAO.getPriceProduct("abc");
-            String strJson = new Gson().toJson(priceTrackerDAO.getPriceProduct("abc"));
+            String strJson = new Gson().toJson(priceTrackerDAO.getPriceProduct(url));
+            out.print(strJson);
+        }
+        if (userPath.equals("/getPriceHistory")) {
+            PriceTrackerDAO priceTrackerDAO = new PriceTrackerDAO();
+            String url = request.getParameter("url");
+            String strJson = new Gson().toJson(priceTrackerDAO.getPriceHistory(url));
             out.print(strJson);
         }
     }
