@@ -15,7 +15,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import net.sourceforge.jtds.jdbc.*;
 import net.sourceforge.jtds.jdbcx.*;
-//hello
 /**
  *
  * @author Minh Tran
