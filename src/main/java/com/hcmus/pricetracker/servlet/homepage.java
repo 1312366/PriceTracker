@@ -42,6 +42,13 @@ public class homepage extends HttpServlet {
             String strJson = new Gson().toJson(priceTrackerDAO.getPriceHistory(url));
             out.print(strJson);
         }
+        if (userPath.equals("/saveUserRequest")) {
+            PriceTrackerDAO priceTrackerDAO = new PriceTrackerDAO();
+            String url = request.getParameter("url");
+            String sessionID = request.getParameter("sessionID") == null ? "":request.getParameter("sessionID");
+            Integer result=priceTrackerDAO.saveUserRequest(url, sessionID);
+            out.print(result);
+        }
     }
 
 }

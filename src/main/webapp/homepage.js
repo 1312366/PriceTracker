@@ -1,5 +1,5 @@
 /* 
- Author Tran Nhat Minh
+ Author Minh Tran
  */
 var param = function (name, value) {
     this.name = name;
@@ -8,8 +8,9 @@ var param = function (name, value) {
 $(document).ready(function () {
     $("#btn_search").click(function () {
         getDataTiki($("#inputURL").val());
-//        getPriceProduct($("#inputURL").val());
+        getPriceProduct($("#inputURL").val());
         getPriceHistory($("#inputURL").val());
+        saveUserRequest($("#inputURL").val());
     });
 });
 
@@ -21,10 +22,11 @@ var getPriceProduct = function (url) {
         type: "POST",
         data: filterParam,
         success: function (response) {
-            response = $.parseJSON(response);
-            for (var key in response) {
-                alert(response[key].avgPrice);
-            }
+            $("#avgPrice").text(response[0].price);
+            $("#hPrice").text(response[1].price);
+            $("#lPrice").text(response[2].price);
+            $("#hDate").text(response[1].dateUpdated);
+            $("#lDate").text(response[2].dateUpdated);
         },
         error: function () {
         }
@@ -45,7 +47,6 @@ var getPriceHistory = function (url) {
                 catelories[catelories.length] = response[key].dateUpdated;
                 productsPrice[productsPrice.length] = response[key].price;
             });
-
             Highcharts.chart('chartContainer', {
                 chart: {
                     type: 'line'
@@ -98,6 +99,23 @@ var getDataTiki = function (link) {
             $(response).find('[id="product-name"]').each(function () {
                 $(".item-name").html($.trim($(this).html()));// nhúng tên sản phẩm vào website
             });
+        },
+        error: function () {
+        }
+    });
+};
+var saveUserRequest = function (url) {
+    var filterParam = new Array();
+    filterParam[filterParam.length] = new param("url", url);
+    filterParam[filterParam.length] = new param("sessionID", readCookie("sessionID_Min"));
+    $.ajax({
+        url: "saveUserRequest",
+        type: "POST",
+        data: filterParam,
+        success: function (response) {
+            if (response > 0) {
+                createCookie("sessionID_Min", response,0.5);
+            }
         },
         error: function () {
         }

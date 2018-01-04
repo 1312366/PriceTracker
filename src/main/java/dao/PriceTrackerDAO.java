@@ -43,6 +43,8 @@ public class PriceTrackerDAO {
     }
 
     //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="GET PRICE PRODUCT">
     public PriceDTO getPriceProduct(String link) {
         Connection con = getConnection();
         PriceDTO priceDTO = new PriceDTO();
@@ -79,7 +81,9 @@ public class PriceTrackerDAO {
         return priceDTO;
 
     }
-
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="GET PRICE HISTORY">
     public List<PriceDTO> getPriceHistory(String link) {
         Connection con = getConnection();
         List<PriceDTO> list = new ArrayList<>();
@@ -117,7 +121,8 @@ public class PriceTrackerDAO {
         }
 
     }
-
+    //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="INSERT DATA TO SQL SERVER ">
     public void insertDataToDB() {
         Connection con = null;
@@ -159,5 +164,42 @@ public class PriceTrackerDAO {
         }
     }
 
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="SAVE USER REQUEST">
+    public Integer saveUserRequest(String url, String sessionId) {
+        Connection con = getConnection();
+        Integer result = 0;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            String sql = "EXEC saveUserRequest ?, ?";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, link);
+            ps.setString(2, sessionId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                result = rs.getInt("RESULT");
+            }
+            con.close();
+            return result;
+        } catch (Exception ex) {
+            ex.toString();
+            return result
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+            }
+        }
+    }
     //</editor-fold>
 }

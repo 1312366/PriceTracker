@@ -26,6 +26,8 @@
                 </div>
                 <div class="item-name">
                 </div>
+
+
                 <div class="item-discription">
                     Điện Thoại iPhone 8 Plus 64GB - Hàng Chính Hãng FPT
 
@@ -53,18 +55,17 @@
                     <tbody id="tbl_price">
                         <tr>
                             <td>Giá trung bình</td>
-                            <td>27.500.000đ </td>
-                            <td>07-12-2017</td>
+                            <td id='avgPrice'>27.500.000đ </td>
                         </tr>
                         <tr class="highest_price">
                             <td>Cao Nhất <sup>*</sup></td>
-                            <td>27.500.000đ</td>
-                            <td>07-12-2017</td>
+                            <td id='hPrice'>27.500.000đ</td>
+                            <td id='hDate'>07-12-2017</td>
                         </tr>
                         <tr class="lowest_price">
                             <td>Thấp Nhất <sup>*</sup></td>
-                            <td>27.500.000đ</td>
-                            <td>07-12-2017</td>
+                            <td id='lPrice'>27.500.000đ</td>
+                            <td id='lDate'>07-12-2017</td>
                         </tr>
 
                     </tbody>
