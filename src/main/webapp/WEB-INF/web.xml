@@ -15,6 +15,7 @@
         <url-pattern>/getPriceProduct</url-pattern>
         <url-pattern>/getPriceHistory</url-pattern>
         <url-pattern>/saveUserRequest</url-pattern>
+        <url-pattern>/getSuggestUrl</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

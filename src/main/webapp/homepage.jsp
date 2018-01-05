@@ -78,31 +78,31 @@
                  margin-top: 100px;
                  ">
                 <div class="product1 col-md-3">
-                    <div class="product-image col-md-12">
-                        <img src="https://vcdn.tikicdn.com/cache/550x550/media/catalog/product/1/_/1.u4939.d20170921.t153352.506708.jpg"  alt="Smiley face" height="100%" width="100%">
+                    <div class="product-image1 col-md-12">
+                        <img id="sgImg1"  src="https://vcdn.tikicdn.com/cache/550x550/media/catalog/product/1/_/1.u4939.d20170921.t153352.506708.jpg"  alt="Smiley face" height="100%" width="100%">
                     </div>
                     Điện Thoại iPhone X 64GB - Hàng Nhập Khẩu
 
                 </div>
 
-                <div class="product1 col-md-3">
-                    <div class="product-image col-md-12">
+                <div class="product2 col-md-3">
+                    <div class="product-image2 col-md-12">
                         <img src="https://vcdn.tikicdn.com/cache/550x550/media/catalog/product/v/a/vang%20dong_1%20(1).u696.d20160401.t004115.jpg"  alt="Smiley face" height="100%" width="100%">
                     </div>
                     Samsung Galaxy J1 (2016)
 
                 </div>
-                <div class="product1 col-md-3">
-                    <div class="product-image col-md-12">
-                        <img src="https://vcdn.tikicdn.com/cache/550x550/media/catalog/product/h/t/htc10silver1.u425.d20160524.t163116.jpg"  alt="Smiley face" height="100%" width="100%">
+                <div class="product3 col-md-3">
+                    <div class="product-image3 col-md-12">
+                        <img id="sgImg3"  src="https://vcdn.tikicdn.com/cache/550x550/media/catalog/product/h/t/htc10silver1.u425.d20160524.t163116.jpg"  alt="Smiley face" height="100%" width="100%">
                     </div>
                     Điện Thoại HTC 10 - Hàng Chính Hãng
 
 
                 </div>
-                <div class="product1 col-md-3">
-                    <div class="product-image col-md-12">
-                        <img src="https://vcdn.tikicdn.com/cache/550x550/media/catalog/product/s/o/sony-xzden.u504.d20161003.t161127.398838.jpg"  alt="Smiley face" height="100%" width="100%">
+                <div class="product4 col-md-3">
+                    <div class="product-image4 col-md-12">
+                        <img id="sgImg4" src="https://vcdn.tikicdn.com/cache/550x550/media/catalog/product/s/o/sony-xzden.u504.d20161003.t161127.398838.jpg"  alt="Smiley face" height="100%" width="100%">
                     </div>
                     Sony Xperia XZ - F8332 - Hàng Chính Hãng
 

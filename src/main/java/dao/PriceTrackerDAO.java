@@ -204,5 +204,44 @@ public class PriceTrackerDAO {
         }
     }
     //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="getSuggestUrl">
+    public List<PriceDTO> getSuggestUrl(String link) {
+        Connection con = getConnection();
+        List<PriceDTO> resultList =new ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            String sql = "EXEC GET_SUGGEST_URLS ?";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, link);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                 PriceDTO priceDTO = new PriceDTO();
+                priceDTO.setUrl(rs.getString("PRODUCT_LINK"));
+                resultList.add(priceDTO);
+            }
+            con.close();
+            return resultList;
+        } catch (Exception ex) {
+            ex.toString();
+            return resultList;
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+            }
+        }
+        
+    }
+    //</editor-fold>
 }
 

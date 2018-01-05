@@ -45,9 +45,15 @@ public class homepage extends HttpServlet {
         if (userPath.equals("/saveUserRequest")) {
             PriceTrackerDAO priceTrackerDAO = new PriceTrackerDAO();
             String url = request.getParameter("url");
-            Integer sessionID = request.getParameter("sessionID").equals("") ? -1 :Integer.parseInt(request.getParameter("sessionID"));
-            Integer result=priceTrackerDAO.saveUserRequest(url, sessionID);
+            Integer sessionID = request.getParameter("sessionID").equals("") ? -1 : Integer.parseInt(request.getParameter("sessionID"));
+            Integer result = priceTrackerDAO.saveUserRequest(url, sessionID);
             out.print(result);
+        }
+        if (userPath.equals("/getSuggestUrl")) {
+            PriceTrackerDAO priceTrackerDAO = new PriceTrackerDAO();
+            String url = request.getParameter("url");
+            String strJson = new Gson().toJson(priceTrackerDAO.getSuggestUrl(url));
+            out.print(strJson);
         }
     }
 

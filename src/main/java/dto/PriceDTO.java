@@ -10,6 +10,7 @@ public class PriceDTO {
     int highestPrice;
     int price;
     String dateUpdated;
+    String url;
     
     public PriceDTO(){
         this.price =0;
@@ -17,7 +18,16 @@ public class PriceDTO {
         this.highestPrice=0;
         this.lowestPrice=0;
         this.dateUpdated="";
+        this.url="";
     }   
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public int getPrice() {
         return price;

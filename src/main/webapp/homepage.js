@@ -123,6 +123,44 @@ var saveUserRequest = function (url) {
     });
 };
 
+var getSuggestUrl = function (url) {
+    var filterParam = new Array();
+    filterParam[filterParam.length] = new param("url", url);
+    $.ajax({
+        url: "getSuggestUrl",
+        type: "POST",
+        data: filterParam,
+        success: function (response) {
+            response = $.parseJSON(response);
+            $.each(response, function (key) {
+                $.ajax({
+                    url: response[key].url,
+                    type: "POST",
+                    success: function (response) {
+                        // lấy hình ảnh của sản phẩm
+                        var srcImg = "";
+                        var namePrc="";
+                        $(response).find('[id="product-magiczoom"]').each(function () {
+                            srcImg = $(this).attr("src");// nhúng hình ảnh vào website
+                        });
+                        //lấy tên của sản phẩm
+                        $(response).find('[id="product-name"]').each(function () {
+                           namePrc= $.trim($(this).html());// nhúng tên sản phẩm vào website
+                        });
+                        var html="";
+                        html+='<a href="'+response[key].url+'"><img id="sgImg1"  src="'+srcImg+'"   height="100%" width="100%"></a>';
+                        $(".product-image"+(key+1)).html(html);
+                    },
+                    error: function () {
+                    }
+                });
+            });
+        },
+        error: function () {
+        }
+    });
+};
+
 //<editor-fold defaultstate="collapsed" desc="CREATE COOKIE">
 function createCookie(name, value, hour) {
     var expires = "";
