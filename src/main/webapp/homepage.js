@@ -11,6 +11,7 @@ $(document).ready(function () {
         getPriceProduct($("#inputURL").val());
         getPriceHistory($("#inputURL").val());
         saveUserRequest($("#inputURL").val());
+        getSuggestUrl($("#inputURL").val());
     });
 });
 
@@ -133,8 +134,9 @@ var getSuggestUrl = function (url) {
         success: function (response) {
             response = $.parseJSON(response);
             $.each(response, function (key) {
+                var url=response[key].url;
                 $.ajax({
-                    url: response[key].url,
+                    url: url,
                     type: "POST",
                     success: function (response) {
                         // lấy hình ảnh của sản phẩm
@@ -148,8 +150,9 @@ var getSuggestUrl = function (url) {
                            namePrc= $.trim($(this).html());// nhúng tên sản phẩm vào website
                         });
                         var html="";
-                        html+='<a href="'+response[key].url+'"><img id="sgImg1"  src="'+srcImg+'"   height="100%" width="100%"></a>';
+                        html+='<a href="'+url+'"><img id="sgImg1"  src="'+srcImg+'"   height="100%" width="100%"></a>';
                         $(".product-image"+(key+1)).html(html);
+                        $(".product-image"+(key+1)).next().text(namePrc);
                     },
                     error: function () {
                     }

@@ -43,12 +43,11 @@ public class PriceTrackerDAO {
     }
 
     //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc="GET PRICE PRODUCT">
     public List<PriceDTO> getPriceProduct(String link) {
         Connection con = getConnection();
-        List<PriceDTO> resultList =new ArrayList<>();
-       
+        List<PriceDTO> resultList = new ArrayList<>();
+
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -57,7 +56,7 @@ public class PriceTrackerDAO {
             ps.setString(1, link);
             rs = ps.executeQuery();
             while (rs.next()) {
-                 PriceDTO priceDTO = new PriceDTO();
+                PriceDTO priceDTO = new PriceDTO();
                 priceDTO.setPrice(rs.getInt("PRODUCT_PRICE"));
                 priceDTO.setDateUpdated(rs.getString("DATE_UPDATED"));
                 resultList.add(priceDTO);
@@ -81,10 +80,10 @@ public class PriceTrackerDAO {
             } catch (Exception e) {
             }
         }
-        
+
     }
     //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc="GET PRICE HISTORY">
     public List<PriceDTO> getPriceHistory(String link) {
         Connection con = getConnection();
@@ -124,7 +123,7 @@ public class PriceTrackerDAO {
 
     }
     //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc="INSERT DATA TO SQL SERVER ">
     public void insertDataToDB() {
         Connection con = null;
@@ -139,14 +138,13 @@ public class PriceTrackerDAO {
             String csvFile = "C:\\Users\\Administrator\\Downloads/" + dateHourFormat.format(currentDate) + "-data.csv";
             String line = "";
             String cvsSplitBy = ";";
-            String sql = "INSERT INTO PRODUCTS_PRICE(PRODUCT_LINK,PRODUCT_PRICE,DATE_UPDATED) VALUES(?,?,?);";
+            String sql = "EXEC INSERT_PRODUCT_PRICE ?, ?";
             ps = (PreparedStatement) con.prepareStatement(sql);
             BufferedReader br = new BufferedReader(new FileReader(csvFile));
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(cvsSplitBy);
-                ps.setString(1, data[0]);
-                ps.setInt(2, Integer.parseInt(data[1]));
-                ps.setString(3, dateUpdate);
+                ps.setInt(1, Integer.parseInt(data[1])-30000);
+                ps.setString(2, data[0]);
                 ps.addBatch();
             }
             ps.executeBatch();
@@ -167,7 +165,6 @@ public class PriceTrackerDAO {
     }
 
     //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc="SAVE USER REQUEST">
     public Integer saveUserRequest(String url, Integer sessionId) {
         Connection con = getConnection();
@@ -204,11 +201,11 @@ public class PriceTrackerDAO {
         }
     }
     //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc="getSuggestUrl">
     public List<PriceDTO> getSuggestUrl(String link) {
         Connection con = getConnection();
-        List<PriceDTO> resultList =new ArrayList<>();
+        List<PriceDTO> resultList = new ArrayList<>();
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -217,7 +214,7 @@ public class PriceTrackerDAO {
             ps.setString(1, link);
             rs = ps.executeQuery();
             while (rs.next()) {
-                 PriceDTO priceDTO = new PriceDTO();
+                PriceDTO priceDTO = new PriceDTO();
                 priceDTO.setUrl(rs.getString("PRODUCT_LINK"));
                 resultList.add(priceDTO);
             }
@@ -240,8 +237,7 @@ public class PriceTrackerDAO {
             } catch (Exception e) {
             }
         }
-        
+
     }
     //</editor-fold>
 }
-
