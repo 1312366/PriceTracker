@@ -22,6 +22,7 @@ var getPriceProduct = function (url) {
         type: "POST",
         data: filterParam,
         success: function (response) {
+            response = $.parseJSON(response);
             $("#avgPrice").text(response[0].price);
             $("#hPrice").text(response[1].price);
             $("#lPrice").text(response[2].price);
@@ -114,7 +115,7 @@ var saveUserRequest = function (url) {
         data: filterParam,
         success: function (response) {
             if (response > 0) {
-                createCookie("sessionID_Min", response,0.5);
+                createCookie("sessionID_Min", response, 0.5);
             }
         },
         error: function () {

@@ -45,9 +45,10 @@ public class PriceTrackerDAO {
     //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="GET PRICE PRODUCT">
-    public PriceDTO getPriceProduct(String link) {
+    public List<PriceDTO> getPriceProduct(String link) {
         Connection con = getConnection();
-        PriceDTO priceDTO = new PriceDTO();
+        List<PriceDTO> resultList =new ArrayList<>();
+       
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -56,14 +57,16 @@ public class PriceTrackerDAO {
             ps.setString(1, link);
             rs = ps.executeQuery();
             while (rs.next()) {
-                priceDTO.setLowestPrice(rs.getInt("LOWEST_PRICE"));
-                priceDTO.setAvgPrice(rs.getInt("AVG_PRICE"));
-                priceDTO.setHighestPrice(rs.getInt("HIGHEST_PRICE"));
+                 PriceDTO priceDTO = new PriceDTO();
+                priceDTO.setPrice(rs.getInt("PRODUCT_PRICE"));
+                priceDTO.setDateUpdated(rs.getString("DATE_UPDATED"));
+                resultList.add(priceDTO);
             }
             con.close();
+            return resultList;
         } catch (Exception ex) {
             ex.toString();
-
+            return resultList;
         } finally {
             try {
                 if (rs != null) {
@@ -78,8 +81,7 @@ public class PriceTrackerDAO {
             } catch (Exception e) {
             }
         }
-        return priceDTO;
-
+        
     }
     //</editor-fold>
     
@@ -167,7 +169,7 @@ public class PriceTrackerDAO {
     //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="SAVE USER REQUEST">
-    public Integer saveUserRequest(String url, String sessionId) {
+    public Integer saveUserRequest(String url, Integer sessionId) {
         Connection con = getConnection();
         Integer result = 0;
         PreparedStatement ps = null;
@@ -175,8 +177,8 @@ public class PriceTrackerDAO {
         try {
             String sql = "EXEC saveUserRequest ?, ?";
             ps = con.prepareStatement(sql);
-            ps.setString(1, link);
-            ps.setString(2, sessionId);
+            ps.setInt(1, sessionId);
+            ps.setString(2, url);
             rs = ps.executeQuery();
             while (rs.next()) {
                 result = rs.getInt("RESULT");
@@ -185,7 +187,7 @@ public class PriceTrackerDAO {
             return result;
         } catch (Exception ex) {
             ex.toString();
-            return result
+            return result;
         } finally {
             try {
                 if (rs != null) {
@@ -203,3 +205,4 @@ public class PriceTrackerDAO {
     }
     //</editor-fold>
 }
+
